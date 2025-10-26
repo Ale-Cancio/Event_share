@@ -8,4 +8,7 @@ router.post('/register', userController.register.bind(userController));
 // POST /api/users/login - Login (for future use)
 router.post('/login', userController.login.bind(userController));
 
+// POST /api/users/logout
+router.post('/logout/',userController.logout.bind(userController));
+
 module.exports = router;

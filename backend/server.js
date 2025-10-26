@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
 
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({

@@ -1,4 +1,6 @@
 const userService = require('../services/userService');
+const tokenBlacklist = require('../../utils/tokenblacklist');
+
 const jwt = require('jsonwebtoken');
 
 class UserController {
@@ -131,6 +133,34 @@ class UserController {
         success: false,
         message: 'Server error during login'
       });
+    }
+  }
+
+  async logout (req, res) {
+    try {
+      
+      const authHeader = req.headers.authorization;
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(400).json({
+          success: false,
+          message: "No token provided"
+        });
+      }
+
+      const token = authHeader.split(" ")[1];
+      tokenBlacklist.add(token);
+
+      return res.status(200).json({
+        success: true,
+        message: "Logout successful"
+      });
+    } catch (error) {
+        console.error("Logout error:", error);
+        return res.status(500).json({
+          success: false,
+          message: "Server error during logout"
+        });
     }
   }
 }
