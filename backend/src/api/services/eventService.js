@@ -2,6 +2,18 @@ const pool = require('../../config/database');
 const { v4: uuidv4 } = require('uuid');
 const QRCode = require('qrcode');
 
+const AWS = require("aws-sdk");
+
+// AWS S3 Configuration
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+  region: process.env.AWS_REGION,
+});
+
+const BUCKET_NAME = process.env.S3_BUCKET_NAME;
+
+
 class EventService {
   // Generate a unique QR code string
   generateQRCodeString() {
@@ -47,6 +59,9 @@ class EventService {
 
     const values = [userId, qrCodeString, event_name, event_date, location, description, 'draft'];
     const result = await pool.query(query, values);
+    const newEvent = result.rows[0];
+
+    
 
     return result.rows[0];
   }

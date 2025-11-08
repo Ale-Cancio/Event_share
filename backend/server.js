@@ -6,6 +6,7 @@ require('dotenv').config({ path: './db.env' });
 // Import routes
 const userRoutes = require('./src/api/routes/userRoutes');
 const eventRoutes = require('./src/api/routes/eventRoutes');
+const mediaRoutes = require('./src/api/routes/mediaRoutes');
 
 // Import database to test connection
 require('./src/config/database');
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
+app.use("/api/media", mediaRoutes);
 
 
 // Health check endpoint
