@@ -89,7 +89,7 @@ class EventController {
         });
       }
 
-      if (event.user_id !== userId) {
+      if (event.organizer_id !== userId) {
         return res.status(403).json({
           success: false,
           message: 'Unauthorized to access this event'

@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 class UserService {
   // Check if email already exists
   async emailExists(email) {
-    const query = 'SELECT user_id FROM public.users WHERE email = $1';
+    const query = 'SELECT organizer_id FROM public.users WHERE email = $1';
     const result = await pool.query(query, [email]);
     return result.rows.length > 0;
   }
@@ -25,7 +25,7 @@ class UserService {
     const query = `
       INSERT INTO public.users (email, password, role)
       VALUES ($1, $2, $3)
-      RETURNING user_id, email, role, created_at
+      RETURNING organizer_id, email, role, created_at
     `;
     
     const result = await pool.query(query, [email, hashedPassword, role]);

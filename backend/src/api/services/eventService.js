@@ -40,9 +40,9 @@ class EventService {
     const qrCodeString = this.generateQRCodeString();
 
     const query = `
-      INSERT INTO public.events (user_id, qr_code, event_name, event_date, location, description, status)
+      INSERT INTO public.events (organizer_id, qr_code, event_name, event_date, location, description, status)
       VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING event_id, user_id, qr_code, event_name, event_date, location, description, status, created_at
+      RETURNING event_id, organizer_id, qr_code, event_name, event_date, location, description, status, created_at
     `;
 
     const values = [userId, qrCodeString, event_name, event_date, location, description, 'draft'];
@@ -63,7 +63,7 @@ class EventService {
     const query = `
       SELECT e.*, u.email as organizer_email 
       FROM public.events e
-      JOIN public.users u ON e.user_id = u.user_id
+      JOIN public.users u ON e.organizer_id = u.organizer_id
       WHERE e.qr_code = $1
     `;
     const result = await pool.query(query, [qrCode]);
@@ -75,7 +75,7 @@ class EventService {
     const query = `
       SELECT event_id, qr_code, event_name, event_date, location, description, status, created_at
       FROM public.events
-      WHERE user_id = $1
+      WHERE organizer_id = $1
       ORDER BY event_date DESC
     `;
     const result = await pool.query(query, [userId]);
@@ -90,7 +90,7 @@ class EventService {
     if (!existingEvent) {
       throw new Error('Event not found');
     }
-    if (existingEvent.user_id !== userId) {
+    if (existingEvent.organizer_id !== userId) {
       throw new Error('Unauthorized to update this event');
     }
 
@@ -117,7 +117,7 @@ class EventService {
     if (!existingEvent) {
       throw new Error('Event not found');
     }
-    if (existingEvent.user_id !== userId) {
+    if (existingEvent.organizer_id !== userId) {
       throw new Error('Unauthorized to delete this event');
     }
 
