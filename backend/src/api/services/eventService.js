@@ -1,7 +1,7 @@
+// src/api/services/eventService.js
 const pool = require('../../config/database');
 const { v4: uuidv4 } = require('uuid');
 const QRCode = require('qrcode');
-
 const AWS = require("aws-sdk");
 
 // AWS S3 Configuration
@@ -12,7 +12,6 @@ const s3 = new AWS.S3({
 });
 
 const BUCKET_NAME = process.env.S3_BUCKET_NAME;
-
 
 class EventService {
   // Generate a unique QR code string
@@ -50,18 +49,37 @@ class EventService {
     }
 
     const qrCodeString = this.generateQRCodeString();
+    
+    // Generate S3 prefix for storing event photos
+    // Format: events/{event_uuid}/
+    const eventUuid = uuidv4();
+    const s3Prefix = `events/${eventUuid}`;
 
     const query = `
-      INSERT INTO public.events (organizer_id, qr_code, event_name, event_date, location, description, status)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING event_id, organizer_id, qr_code, event_name, event_date, location, description, status, created_at
+      INSERT INTO public.events (
+        user_id, organizer_id, qr_code, event_name, event_date, 
+        location, description, status, s3_prefix, id
+      )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING event_id, user_id, organizer_id, qr_code, event_name, event_date, 
+                location, description, status, created_at, s3_prefix, id
     `;
 
-    const values = [userId, qrCodeString, event_name, event_date, location, description, 'draft'];
-    const result = await pool.query(query, values);
-    const newEvent = result.rows[0];
-
+    // Set both user_id and organizer_id to the same userId value
+    const values = [
+      userId,           // user_id
+      userId,           // organizer_id
+      qrCodeString,     // qr_code
+      event_name,       // event_name
+      event_date,       // event_date
+      location,         // location
+      description,      // description
+      'draft',          // status
+      s3Prefix,         // s3_prefix
+      eventUuid         // id (UUID)
+    ];
     
+    const result = await pool.query(query, values);
 
     return result.rows[0];
   }
@@ -78,7 +96,7 @@ class EventService {
     const query = `
       SELECT e.*, u.email as organizer_email 
       FROM public.events e
-      JOIN public.users u ON e.organizer_id = u.organizer_id
+      JOIN public.users u ON e.organizer_id = u.user_id
       WHERE e.qr_code = $1
     `;
     const result = await pool.query(query, [qrCode]);
