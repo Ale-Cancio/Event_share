@@ -65,6 +65,7 @@ export const mediaAPI = {
   uploadGuestMedia: (formData) =>
     api.post("/media/upload", formData, {
       headers: { "Content-Type": "multipart/form-data" },
+    }),
 };
 
 
