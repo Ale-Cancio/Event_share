@@ -26,32 +26,48 @@ api.interceptors.request.use(
 
 // Auth APIs
 export const authAPI = {
-  register: (email, password) => 
+  register: (email, password) =>
     api.post('/users/register', { email, password }),
-  
-  login: (email, password) => 
+
+  login: (email, password) =>
     api.post('/users/login', { email, password }),
 };
 
 // Event APIs
 export const eventAPI = {
-  createEvent: (eventData) => 
+  createEvent: (eventData) =>
     api.post('/events', eventData),
-  
-  getMyEvents: () => 
+
+  getMyEvents: () =>
     api.get('/events'),
-  
-  getEventById: (eventId) => 
+
+  getEventById: (eventId) =>
     api.get(`/events/${eventId}`),
-  
+
+  getEventByQRCode: (qrCode) =>
+    api.get(`/events/qr/${qrCode}`),
+
+  updateEvent: (eventId, updates) =>
+    api.put(`/events/${eventId}`, updates),
+
+  deleteEvent: (eventId) =>
+    api.delete(`/events/${eventId}`),
+
+  getPublicEvent: (code) =>
+    api.get(`/events/public/${code}`),
+
   getEventByQRCode: (qrCode) => 
     api.get(`/events/qr/${qrCode}`),
-  
-  updateEvent: (eventId, updates) => 
-    api.put(`/events/${eventId}`, updates),
-  
-  deleteEvent: (eventId) => 
-    api.delete(`/events/${eventId}`),
+
 };
+
+export const mediaAPI = {
+  uploadGuestMedia: (formData) =>
+    api.post("/media/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+};
+
+
+
 
 export default api;

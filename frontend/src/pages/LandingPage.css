@@ -1,0 +1,200 @@
+.landing-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Main card  */
+.landing-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  width: 100%;
+  padding: 30px 40px;
+  box-sizing: border-box;
+}
+
+/* Header row: title + logout button */
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.landing-header h1 {
+  color: #333;
+  font-size: 26px;
+  margin: 0;
+}
+
+/* General subtitle */
+.landing-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Top action row for "Create Event" button */
+.landing-actions {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+/* Error text */
+.error-text {
+  color: #b30000;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Event list */
+.event-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-info h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  color: #333;
+}
+
+.event-info p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Container for per-event buttons */
+.event-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;           
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+/* Primary action  */
+.btn-primary {
+  background-color: #667eea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #5567d9;
+  transform: translateY(-1px);
+}
+
+/* Secondary action  */
+.btn-secondary {
+  background-color: #f3f4ff;
+  color: #4b51c6;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e3ff;
+  transform: translateY(-1px);
+}
+
+/* Logout button  */
+.btn-logout {
+  background: none;
+  border: 1px solid #e5e7eb;
+  color: #666;
+  padding: 8px 14px;
+  border-radius: 999px;
+}
+
+.btn-logout:hover {
+  background-color: #f3f4ff;
+  color: #4b51c6;
+}
+
+/* === QR === */
+.qr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.qr-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px 24px 30px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: center;
+}
+
+/* Close button */
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.btn-close:hover {
+  color: #333;
+}
+
+
+@media (max-width: 768px) {
+  .landing-card {
+    padding: 25px 20px;
+  }
+
+  .landing-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .event-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .event-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

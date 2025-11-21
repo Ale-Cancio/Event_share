@@ -35,7 +35,7 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
 
       // Redirect to create event page
-      navigate('/create-event');
+      navigate('/events'); 
     } catch (err) {
       setError(err.response?.data?.message || 'Authentication failed');
       console.error('Auth error:', err);
