@@ -147,17 +147,23 @@
   justify-content: center;
   align-items: center;
   z-index: 50;
+  padding: 20px;
 }
 
+/* Modal container */
 .qr-modal {
   background: #ffffff;
   border-radius: 20px;
-  padding: 24px 24px 30px;
-  max-width: 420px;
-  width: 90%;
+  padding: 20px 25px 25px;
+  width: 100%;
+  max-width: 600px;      /* wider horizontally */
+  max-height: 80vh;      /* limits height to 80% of viewport */
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   position: relative;
   text-align: center;
+  animation: fadeIn 0.2s ease;
+  overflow-y: auto;      /* scroll if content is too tall */
+  overflow-wrap: break-word;
 }
 
 /* Close button */
@@ -167,9 +173,10 @@
   right: 12px;
   background: transparent;
   border: none;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   color: #666;
+  z-index: 10; /* ensures it’s always above content */
 }
 
 .btn-close:hover {

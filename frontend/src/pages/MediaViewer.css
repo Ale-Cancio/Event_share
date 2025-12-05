@@ -1,0 +1,206 @@
+/* Container */
+.media-upload-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+  background: radial-gradient(circle at top left, #667eea, #764ba2); /* Purple gradient background */
+}
+
+/* Card (holds header + gallery) */
+.media-upload-card {
+  background: #ffffff;
+  padding: 32px 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+  max-width: 600px;
+  width: 100%;
+  overflow: hidden;
+  animation: slideIn 0.5s ease-out;
+  position: relative;
+  box-sizing: border-box;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.media-upload-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 16px 16px 0 0;
+}
+
+
+.media-upload-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.media-upload-header .subtitle {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  color: #fff;
+}
+
+/* Event meta */
+.event-details-box {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: left;
+  backdrop-filter: blur(10px);
+}
+
+/* Gallery */
+.gallery-grid {
+  margin-top: 12px;
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  box-sizing: border-box;
+  align-items: start;
+}
+
+@media (min-width: 640px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* Each tile */
+.grid > .relative {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f6f7fb;
+  box-sizing: border-box;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.media-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Back button */
+.back-button {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.back-button:hover { background: #e5e7eb; }
+.back-button:active { transform: scale(0.97); }
+
+/* Modal overlay */
+.media-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(102, 126, 234, 0.9); /* Purple overlay */
+  background: linear-gradient(135deg, rgba(102,126,234,0.9) 0%, rgba(118,75,162,0.9) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal */
+.media-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Modal media */
+.media-modal-media {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  pointer-events: auto;
+}
+
+/* Modal controls */
+.media-modal-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #f1f1f1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 10;
+}
+
+/* Helper text */
+.helper-text {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* Messages */
+.success-message {
+  background-color: #ecfdf3;
+  color: #166534;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-left: 4px solid #2a7;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  border-left: 4px solid #c33;
+}

@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import CreateEvent from './pages/CreateEvent';
 import MediaUpload from "./pages/MediaUpload";
 import LandingPage from "./pages/LandingPage";
+import MediaViewer from './pages/MediaViewer';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/create-event" element={<CreateEvent />} />
         <Route path="/upload/:qrCode" element={<MediaUpload />} />
         <Route path="/events" element={<LandingPage />} />
+        <Route path="/events/:eventId/media" element={<MediaViewer />} />
       </Routes>
     </Router>
   );

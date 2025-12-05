@@ -26,16 +26,14 @@ const Login = () => {
     setError('');
 
     try {
-      const response = isLogin 
+      const response = isLogin
         ? await authAPI.login(formData.email, formData.password)
         : await authAPI.register(formData.email, formData.password);
 
-      // Save token to localStorage
       localStorage.setItem('token', response.data.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
 
-      // Redirect to create event page
-      navigate('/events'); 
+      navigate('/events');
     } catch (err) {
       setError(err.response?.data?.message || 'Authentication failed');
       console.error('Auth error:', err);
@@ -49,9 +47,7 @@ const Login = () => {
       <div className="login-card">
         <h1>{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
         <p className="subtitle">
-          {isLogin 
-            ? 'Login to manage your events' 
-            : 'Sign up to start creating events'}
+          {isLogin ? 'Login to manage your events' : 'Sign up to start creating events'}
         </p>
 
         {error && <div className="error-message">{error}</div>}
@@ -83,8 +79,8 @@ const Login = () => {
             />
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="btn btn-primary btn-full"
             disabled={loading}
           >
@@ -94,7 +90,7 @@ const Login = () => {
 
         <p className="toggle-text">
           {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <button 
+          <button
             onClick={() => setIsLogin(!isLogin)}
             className="toggle-button"
           >

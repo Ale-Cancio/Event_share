@@ -1,21 +1,21 @@
-/* src/pages/MediaUpload.css */
-
+/* Container and card */
 .media-upload-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  background: radial-gradient(circle at top left, #f5f7ff, #e4ecff);
 }
 
 .media-upload-card {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
   max-width: 600px;
   width: 100%;
   overflow: hidden;
+  padding: 32px 28px;
   animation: slideIn 0.5s ease-out;
 }
 
@@ -30,26 +30,29 @@
   }
 }
 
+/* Header */
 .media-upload-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 30px;
   text-align: center;
+  border-radius: 16px 16px 0 0;
 }
 
 .media-upload-header h1 {
   margin: 0 0 10px 0;
-  font-size: 28px;
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
-.subtitle {
-  font-size: 16px;
-  margin: 10px 0 20px 0;
+.media-upload-header .subtitle {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
   opacity: 0.9;
+  color: #fff;
 }
 
-/* Event Details Box */
+/* Event details box */
 .event-details-box {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 12px;
@@ -93,7 +96,7 @@
   font-weight: 500;
 }
 
-/* Countdown specific styles */
+/* Countdown */
 .deadline {
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
@@ -114,168 +117,131 @@
   font-weight: 600;
 }
 
-/* Upload Form */
+/* Upload form */
 .upload-form {
-  padding: 30px;
+  margin-top: 12px;
+  padding: 30px 0 0 0;
 }
 
-.form-group {
+.upload-form .form-group {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.upload-form label {
   display: block;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #374151;
 }
 
-.form-group input[type="file"] {
+.upload-form input[type="file"] {
   width: 100%;
   padding: 12px;
   border: 2px dashed #667eea;
   border-radius: 8px;
   background: #f8f9fa;
   cursor: pointer;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
-.form-group input[type="file"]:hover {
+.upload-form input[type="file"]:hover {
   border-color: #764ba2;
   background: #f0f0f0;
 }
 
 .helper-text {
-  font-size: 13px;
-  color: #666;
-  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 6px;
 }
 
 /* Messages */
-.error-message {
-  background: #fee;
-  color: #c33;
-  padding: 12px;
+.success-message {
+  background-color: #ecfdf3;
+  color: #166534;
   border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-left: 4px solid #2a7;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
   border-left: 4px solid #c33;
 }
 
-.success-message {
-  background: #efe;
-  color: #2a7;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  border-left: 4px solid #2a7;
-  font-weight: 600;
-}
-
-/* Upload Closed Message */
+/* Upload closed */
 .upload-closed-message {
-  padding: 40px 30px;
-  text-align: center;
-  background: #fff3cd;
-  border-top: 3px solid #ffc107;
+  padding: 40px
 }
 
-.upload-closed-message h3 {
-  color: #856404;
-  margin-bottom: 10px;
-  font-size: 22px;
-}
-
-.upload-closed-message p {
-  color: #856404;
-  font-size: 16px;
-  margin: 0;
-}
-
-/* Buttons */
-.btn {
-  padding: 14px 28px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-}
-
-.btn-primary:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-full {
+.media-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background: rgba(118, 75, 162, 0.9); /* Purple base */
+  background: linear-gradient(135deg, rgba(102,126,234,0.9) 0%, rgba(118,75,162,0.9) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .media-upload-card {
-    margin: 10px;
-  }
 
-  .media-upload-header h1 {
-    font-size: 24px;
-  }
 
-  .subtitle {
-    font-size: 14px;
-  }
-
-  .event-details-box {
-    padding: 15px;
-  }
-
-  .detail-item {
-    padding: 8px;
-  }
-
-  .detail-icon {
-    font-size: 20px;
-  }
-
-  .upload-form {
-    padding: 20px;
-  }
+/* Modal container */
+.media-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease;
 }
 
-@media (max-width: 480px) {
-  .media-upload-container {
-    padding: 10px;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
 
-  .media-upload-header {
-    padding: 20px;
-  }
+/* Modal media */
+.media-modal-media {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
 
-  .media-upload-header h1 {
-    font-size: 20px;
-  }
+/* Modal close button */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 10;
+}
 
-  .event-details-box {
-    padding: 12px;
-  }
-
-  .detail-item {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .upload-form {
-    padding: 15px;
-  }
+/* Modal controls */
+.media-modal-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #f1f1f1;
 }

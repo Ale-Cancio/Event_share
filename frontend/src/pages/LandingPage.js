@@ -11,7 +11,6 @@ const LandingPage = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const navigate = useNavigate();
 
-  // Load all events for the current user
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -25,8 +24,7 @@ const LandingPage = () => {
           navigate("/login");
         } else {
           setError(
-            err.response?.data?.message ||
-              "Could not load your events. Please try again."
+            err.response?.data?.message || "Could not load your events. Please try again."
           );
         }
       } finally {
@@ -48,14 +46,11 @@ const LandingPage = () => {
     if (!confirmed) return;
 
     try {
-      await eventAPI.deleteEvent(eventId); 
+      await eventAPI.deleteEvent(eventId);
       setEvents((prev) => prev.filter((e) => e.event_id !== eventId));
     } catch (err) {
       console.error("Failed to delete event:", err);
-      setError(
-        err.response?.data?.message ||
-          "Failed to delete event. Please try again."
-      );
+      setError(err.response?.data?.message || "Failed to delete event. Please try again.");
     }
   };
 
@@ -68,18 +63,22 @@ const LandingPage = () => {
     try {
       setError("");
       const eventId = event.id || event.event_id;
-
       const res = await eventAPI.getEventById(eventId);
       const fullEvent = res.data?.data?.event || res.data?.event;
-
       setSelectedEvent(fullEvent);
     } catch (err) {
       console.error("Failed to load event QR code:", err);
-      setError(
-        err.response?.data?.message ||
-          "Could not load QR code for this event. Please try again."
-      );
+      setError(err.response?.data?.message || "Could not load QR code for this event. Please try again.");
     }
+  };
+
+  const handleViewGallery = (event) => {
+    const id = event.event_id || event.id;
+    if (!id) {
+      console.error("Missing event id for gallery navigation", event);
+      return;
+    }
+    navigate(`/events/${id}/media`);
   };
 
   return (
@@ -133,6 +132,12 @@ const LandingPage = () => {
                   >
                     Delete
                   </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handleViewGallery(event)}
+                  >
+                    View Gallery
+                  </button>
                 </div>
               </li>
             ))}
@@ -142,10 +147,7 @@ const LandingPage = () => {
         {selectedEvent && (
           <div className="qr-modal-overlay">
             <div className="qr-modal">
-              <button
-                className="btn-close"
-                onClick={() => setSelectedEvent(null)}
-              >
+              <button className="btn-close" onClick={() => setSelectedEvent(null)}>
                 ✖
               </button>
               <QRCodeDisplay event={selectedEvent} />
