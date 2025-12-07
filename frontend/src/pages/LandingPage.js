@@ -150,7 +150,10 @@ const LandingPage = () => {
               <button className="btn-close" onClick={() => setSelectedEvent(null)}>
                 ✖
               </button>
-              <QRCodeDisplay event={selectedEvent} />
+              <QRCodeDisplay event={{
+                ...selectedEvent,
+                uploadUrl: `${selectedEvent.uploadUrl}`,
+              }} />
             </div>
           </div>
         )}

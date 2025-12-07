@@ -138,7 +138,7 @@
   color: #4b51c6;
 }
 
-/* === QR === */
+/*  QR */
 .qr-modal-overlay {
   position: fixed;
   inset: 0;
@@ -156,13 +156,13 @@
   border-radius: 20px;
   padding: 20px 25px 25px;
   width: 100%;
-  max-width: 600px;      /* wider horizontally */
-  max-height: 80vh;      /* limits height to 80% of viewport */
+  max-width: 600px;      
+  max-height: 80vh;      
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   position: relative;
   text-align: center;
   animation: fadeIn 0.2s ease;
-  overflow-y: auto;      /* scroll if content is too tall */
+  overflow-y: auto;      
   overflow-wrap: break-word;
 }
 
@@ -176,7 +176,7 @@
   font-size: 24px;
   cursor: pointer;
   color: #666;
-  z-index: 10; /* ensures it’s always above content */
+  z-index: 10; 
 }
 
 .btn-close:hover {

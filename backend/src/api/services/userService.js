@@ -1,5 +1,5 @@
 const pool = require('../../config/database');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 class UserService {
   // Check if email already exists
@@ -19,7 +19,7 @@ class UserService {
 
     // Hash the password
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcryptjs.hash(password, saltRounds);
 
     // Insert user into database
     const query = `
@@ -41,7 +41,7 @@ class UserService {
 
   // Verify password (for login later)
   async verifyPassword(plainPassword, hashedPassword) {
-    return await bcrypt.compare(plainPassword, hashedPassword);
+    return await bcryptjs.compare(plainPassword, hashedPassword);
   }
 }
 

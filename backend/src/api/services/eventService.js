@@ -51,7 +51,6 @@ class EventService {
     const qrCodeString = this.generateQRCodeString();
     
     // Generate S3 prefix for storing event photos
-    // Format: events/{event_uuid}/
     const eventUuid = uuidv4();
     const s3Prefix = `events/${eventUuid}`;
 
@@ -65,7 +64,6 @@ class EventService {
                 location, description, status, created_at, s3_prefix, id
     `;
 
-    // Set both user_id and organizer_id to the same userId value
     const values = [
       userId,           // user_id
       userId,           // organizer_id

@@ -23,6 +23,8 @@ class EventController {
 
       const qrCodeImage = await eventService.generateQRCodeImage(newEvent.qr_code);
 
+      const host = `${req.protocol}://${req.get('host')}`;
+
       res.status(201).json({
         success: true,
         message: 'Event created successfully',
@@ -36,7 +38,7 @@ class EventController {
             status: newEvent.status,
             qrCode: newEvent.qr_code,
             qrCodeImage: qrCodeImage,
-            uploadUrl: `http://localhost:3000/upload/${newEvent.qr_code}`,
+            uploadUrl: `/upload/${newEvent.qr_code}`,
             createdAt: newEvent.created_at
           }
         }
@@ -97,6 +99,7 @@ class EventController {
       }
 
       const qrCodeImage = await eventService.generateQRCodeImage(event.qr_code);
+      const host = `${req.protocol}://${req.get('host')}`;
 
       res.status(200).json({
         success: true,
@@ -110,7 +113,7 @@ class EventController {
             status: event.status,
             qrCode: event.qr_code,
             qrCodeImage: qrCodeImage,
-            uploadUrl: `http://localhost:3000/upload/${event.qr_code}`,
+            uploadUrl: `/upload/${event.qr_code}`,
             createdAt: event.created_at
           }
         }

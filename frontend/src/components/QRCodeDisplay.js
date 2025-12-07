@@ -3,18 +3,18 @@ import './QRCodeDisplay.css';
 
 const QRCodeDisplay = ({ event }) => {
   const [copied, setCopied] = useState(false);
+  const fullUploadUrl = `${window.location.origin}${event.uploadUrl}`;
 
   // Copy link to clipboard
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(event.uploadUrl);
+      await navigator.clipboard.writeText(fullUploadUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
     } catch (err) {
       console.error('Failed to copy:', err);
-      // Fallback for older browsers
       const textArea = document.createElement('textarea');
-      textArea.value = event.uploadUrl;
+      textArea.value = fullUploadUrl;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand('copy');
@@ -68,7 +68,7 @@ const QRCodeDisplay = ({ event }) => {
             <div className="link-wrapper">
               <input 
                 type="text" 
-                value={event.uploadUrl} 
+                value={fullUploadUrl} 
                 readOnly 
                 className="link-input"
               />
